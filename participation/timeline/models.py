@@ -6,10 +6,8 @@ from django.conf import settings
 class Event(models.Model):
     title = models.CharField(max_length=200)
     type_of_event = models.CharField(max_length=50, help_text='Enter the event type (e.g. conference, training, workshop)')
-    type_of_participation = models.CharField(max_length=50, help_text='Enter either "Speaker" or "Attendee"')
     date = models.DateTimeField('event date')
     end_date = models.DateTimeField('event enddate')
-    duration = models.DecimalField(max_digits=5, decimal_places=1, help_text='Enter your attendance time in hours')
     description = models.CharField(max_length=1000)
 
     def __str__(self):
@@ -21,8 +19,12 @@ class Event(models.Model):
 class Attendance(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
 
-
+class Activity(models.Model):
+    type = type_of_participation = models.CharField(max_length=50, help_text='Enter either "Speaker" or "Attendee"')
+    duration = models.DecimalField(max_digits=5, decimal_places=1, help_text='Enter your attendance time in hours')
+    description = models.CharField(max_length=1000)
 
     
 
