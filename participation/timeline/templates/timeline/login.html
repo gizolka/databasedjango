@@ -1,9 +1,20 @@
-from django.contrib.auth.models import User
+{% if query_results %}
+<html>
+    <head>
+	<title> SMILE timeline </title>
+    </head>
 
-# Create user and save to the database
-user = User.objects.create_user('myusername', 'myemail@crazymail.com', 'mypassword')
 
-# Update fields and then save again
-user.first_name = 'John'
-user.last_name = 'Citizen'
-user.save()
+    <table>
+        <tr>
+                <td> <a href="/timeline/"> Home </a> </td>
+                <td><a href=""> Add activity </a> </td>
+                <td><a href="">Logout </a>  </td>
+        </tr>
+    </table>
+</html>
+
+
+
+
+

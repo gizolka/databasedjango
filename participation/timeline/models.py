@@ -16,15 +16,12 @@ class Event(models.Model):
     def get_absolute_url(self):
         return reverse('event-detail', args=[str(self.id)])
 
+class Activity(models.Model):
+    type = models.CharField(max_length=50, help_text='Enter either Speaker or Attendee')
+    duration = models.DecimalField(max_digits=5, decimal_places=1, help_text='Enter your attendance time in hours')
+    description = models.CharField(max_length=1000)
+
 class Attendance(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
-
-class Activity(models.Model):
-    type = type_of_participation = models.CharField(max_length=50, help_text='Enter either "Speaker" or "Attendee"')
-    duration = models.DecimalField(max_digits=5, decimal_places=1, help_text='Enter your attendance time in hours')
-    description = models.CharField(max_length=1000)
-
-    
-
