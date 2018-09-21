@@ -18,3 +18,6 @@ def index(request):
 
 def test(request, test_1):
     return HttpResponse("My test input %s." % test_1)
+
+def login(request):
+    return render(request, 'timeline/login.html', {})
