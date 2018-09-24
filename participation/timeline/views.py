@@ -10,7 +10,7 @@ from .models import Event
 def index(request):
 
     query_results = Event.objects.all()
-    template = loader.get_template('timeline/index.html')
+    template = loader.get_template('home.html')
     context = {
         'query_results': query_results,
     }
@@ -20,4 +20,4 @@ def test(request, test_1):
     return HttpResponse("My test input %s." % test_1)
 
 def login(request):
-    return render(request, 'timeline/login.html', {})
+    return render(request, 'registraion/login.html', {})
