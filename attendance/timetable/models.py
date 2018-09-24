@@ -21,9 +21,6 @@ class Activity(models.Model):
     duration = models.DecimalField(max_digits=5, decimal_places=1, help_text='Enter your attendance time in hours')
     description = models.CharField(max_length=1000)
 
-    def __str__(self):
-        return self.type
-
 class Attendance(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
