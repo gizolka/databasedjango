@@ -6,19 +6,28 @@ from django.http import HttpResponseRedirect
 from django.template import loader
 from .models import Event
 
-from .forms import EventForm
+from timetable.forms import EventForm
+
+def home(request):
+    numbers = [1,2,3,4,5]
+    name = "Joanna Gizewska"
+
+    args = {'myName': name, 'numbers': numbers}
+    return render(request, 'timetable/home.html', args)
+
 
 def new_event(request):
 
     if request.method == 'POST':
         form = EventForm(request.POST)
         if form.is_valid():
-            return HttpResponseRedirect('/thanks/')
+            form.save()
+            return HttpResponseRedirect(reverse('/thanks/'))
 
         else:
             form = EventForm()
 
-        return render(request, 'event.html', {'form': form})
+            return render(request, 'timetable/event.html', {'form': form})
 
 
 def index(request):

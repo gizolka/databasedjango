@@ -1,0 +1,26 @@
+
+<html>
+  <head>
+    <title>Login</title>
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'timetable/timetable.css' %}" type="text/css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome!</h1>
+      You can login here.
+      <button class="btn btn-success" type="button" name="button">Login</button>
+    </div>
+    <div class="jumbotron">
+      <h1>Register your event here</h1>
+    </div>
+    <h2>{{ myName }}</h2>
+      <ul>
+        {% for number in numbers %}
+        <li>{{ number }}</li>
+        {% endfor %}
+      </ul>
+  </body>
+</html>

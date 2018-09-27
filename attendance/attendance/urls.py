@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('timetable/', include('timetable.urls')),
     path('admin/', admin.site.urls),
+    path('timetable/', include('timetable.urls')),
+    path('', include('timetable.urls')),
 ]

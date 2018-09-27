@@ -1,44 +1,9 @@
-{% load static %}
+{% extends 'base.html' %}
 
-{% if query_request %}
+<h1>Home</h1>
+{% block head %}
+<title>Home</title>
+{% endblock %}
 
-<html>
-  <head>
-    <title>SMILE attendance</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static 'css/timetable.css' %}">
-  </head>
-  <body>
-    <div>
-      <h1><a href>SMILE Attendance Controller</a></h1>
-    </div>
-
-  <br>
-
-    <table>
-      <tr>
-        <td>Title</td>
-        <td>Type of Event</td>
-        <td>Start Date</td>
-        <td>End Date</td>
-        <td>Description</td>
-      </tr>
-
-  {% for event in query_request %}
-
-      <tr>
-        <td>{{ event.title }}</td>
-        <td>{{ event.type_of_event }}</td>
-        <td>{{ event.date }}</td>
-        <td>{{ event.end_date }}</td>
-        <td>{{ event.description}}</td>
-      </tr>
-
-  {% endfor %}
-
-    </table>
-  </body>
-</html>
-
-{% endif %}
+{% block body %}
+{% endblock %}

@@ -1,14 +1,26 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 # Create your models here.
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    department = models.CharField(max_length=100, default='')
+
+    def create_profile(sender, **kwargs):
+        if kwargs['created']:
+            user_profile = UserProfile.objects.create(user=kwargs['instance'])
+
+    post_save.connect(create_profile, sender=User)
+
 class Event(models.Model):
-    title = models.CharField(max_length=200)
-    type_of_event = models.CharField(max_length=50, help_text='Enter the event type (e.g. conference, training, workshop)')
+    title = models.CharField(max_length=200, default='')
+    type_of_event = models.CharField(max_length=100, default='', help_text='Enter the event type (e.g. conference, training, workshop)')
     date = models.DateTimeField('event date')
     end_date = models.DateTimeField('event enddate')
-    description = models.CharField(max_length=1000)
+    description = models.CharField(max_length=1000, default='')
 
     def __str__(self):
         return self.title
