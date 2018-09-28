@@ -31,12 +31,6 @@ class EventForm(forms.ModelForm):
             'description'
         }
 
-
-form = EventForm()
-
-event = Event.objects.get(pk=1)
-form = EventForm(instance=event)
-
 class ActivityForm(forms.ModelForm):
         model = Activity
         fields = ['type', 'duration', 'description']
