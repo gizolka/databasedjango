@@ -21,17 +21,6 @@ class EventForm(forms.ModelForm):
             'end_date',
             'description'
         }
-    def save(self, commit=True):
-        event = form(EventForm, self).save(commit=False)
-        event.title = self.cleaned_data['title']
-        event.type_of_event = self.cleaned_data['type_of_event']
-        event.date = self.cleaned_data['date']
-        event.end_date = self.cleaned_data['end_date']
-        event.description = cleaned_data['description']
-
-        if commit:
-            event.save()
-        return event
 
 
 form = EventForm()

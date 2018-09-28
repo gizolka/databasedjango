@@ -18,18 +18,22 @@ def home(request):
 
 def new_event(request):
 
-    if request.method == 'POST':
+    if request.POST:
+        a=1/0
         form = EventForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('/thanks/'))
-
+            a=1/0
+            return render(request, 'timetable/thanks.html', {'message': "Thanks"})
         else:
-            form = EventForm()
+            a=1/0
+            return render(request, 'timetable/thanks.html', {'message': "Error"})
 
-            return render(request, 'timetable/event.html', {'form': form})
+    else:
+        form = EventForm()
+        return render(request, 'timetable/event.html', {'form': form})
 
-
+'''
 def index(request):
     query_request = Event.objects.all()
     template = loader.get_template('timetable/index.html')
@@ -40,3 +44,4 @@ def index(request):
 
 def links(request):
     return render(request, 'timetable/links.html', {})
+'''
