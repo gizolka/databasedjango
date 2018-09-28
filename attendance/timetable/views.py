@@ -18,15 +18,12 @@ def home(request):
 
 def new_event(request):
 
-    if request.POST:
-        a=1/0
+    if request.method == 'POST':
         form = EventForm(request.POST)
         if form.is_valid():
             form.save()
-            a=1/0
             return render(request, 'timetable/thanks.html', {'message': "Thanks"})
         else:
-            a=1/0
             return render(request, 'timetable/thanks.html', {'message': "Error"})
 
     else:
