@@ -12,21 +12,22 @@ def home(request):
     numbers = [1,2,3,4,5]
     name = "Joanna Gizewska"
 
-    args = {'myName': name, 'numbers': numbers}
-    return render(request, 'timetable/home.html', args)
+    links = '''
+    <ul>
+        <li><a href="/timetable/event/">Create an event</a></li>
+    </ul>
+    '''
+    return render(request, 'timetable/home.html', { 'message': links })
 
 
 def new_event(request):
 
     if request.POST:
-        a=1/0
         form = EventForm(request.POST)
         if form.is_valid():
             form.save()
-            a=1/0
             return render(request, 'timetable/thanks.html', {'message': "Thanks"})
         else:
-            a=1/0
             return render(request, 'timetable/thanks.html', {'message': "Error"})
 
     else:
