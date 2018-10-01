@@ -7,6 +7,10 @@ from django.template import loader
 from .models import Event
 
 from timetable.forms import EventForm
+from django.views.generic import TemplateView
+
+class HomeView(TemplateView):
+    template_name = 'timetable/home.html'
 
 def home(request):
     numbers = [1,2,3,4,5]
@@ -25,7 +29,7 @@ def new_event(request):
     if request.POST:
         form = EventForm(request.POST)
         if form.is_valid():
-            form.save()
+            form.save(commit=True)
             return render(request, 'timetable/thanks.html', {'message': "Thanks"})
         else:
             return render(request, 'timetable/thanks.html', {'message': "Error"})

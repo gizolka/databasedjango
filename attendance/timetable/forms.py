@@ -23,14 +23,16 @@ class EventForm(forms.ModelForm):
 
     class Meta:
         model = Event
-        fields = {
+        fields = [
             'title',
             'type_of_event',
             'date',
             'end_date',
             'description'
-        }
+        ]
 
+
+'''
 class ActivityForm(forms.ModelForm):
         model = Activity
         fields = ['type', 'duration', 'description']
@@ -38,3 +40,5 @@ class ActivityForm(forms.ModelForm):
 class AttendanceForm(forms.ModelForm):
         model = Attendance
         fields = ['user', 'event', 'activity']
+
+'''
