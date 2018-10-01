@@ -17,7 +17,7 @@ class UserProfile(models.Model):
 
 class Event(models.Model):
     title = models.CharField(max_length=200, default='')
-    type_of_event = models.CharField(max_length=100, default='', help_text='Enter the event type (e.g. conference, training, workshop)')
+    type_of_event = models.CharField(max_length=100, default='')
     date = models.DateTimeField('event date')
     end_date = models.DateTimeField('event enddate')
     description = models.CharField(max_length=1000, default='')

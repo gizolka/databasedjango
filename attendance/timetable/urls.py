@@ -8,6 +8,7 @@ urlpatterns = [
         path('', views.home, name='home'),
         #path('logout'), LogoutView.as_view(template_name='timetable/logout.html', name='logout'),
         path('login/', LoginView.as_view(template_name='timetable/login.html'), name='login'),
+        path('list/', views.event_list, name='list'),
         path('event/', views.new_event, name='event'),
 ]
 

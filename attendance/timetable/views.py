@@ -38,10 +38,9 @@ def new_event(request):
         form = EventForm()
         return render(request, 'timetable/event.html', {'form': form})
 
-'''
-def index(request):
+def event_list(request):
     query_request = Event.objects.all()
-    template = loader.get_template('timetable/index.html')
+    template = loader.get_template('timetable/list.html')
     context = {
         'query_request': query_request,
     }
@@ -49,4 +48,3 @@ def index(request):
 
 def links(request):
     return render(request, 'timetable/links.html', {})
-'''

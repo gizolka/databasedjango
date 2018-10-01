@@ -6,9 +6,11 @@ from django.forms import ModelForm
 from timetable.models import Event, Activity, Attendance
 
 TYPE_OF_EVENT_CHOICES = (
+    ('', '----'),
     ('CF', 'Conference'),
     ('TR', 'Training'),
     ('WS', 'Workshop'),
+    ('ME', 'Meeting'),
 )
 
 class EventForm(forms.ModelForm):
@@ -30,8 +32,6 @@ class EventForm(forms.ModelForm):
             'end_date',
             'description'
         ]
-
-
 '''
 class ActivityForm(forms.ModelForm):
         model = Activity
@@ -40,5 +40,4 @@ class ActivityForm(forms.ModelForm):
 class AttendanceForm(forms.ModelForm):
         model = Attendance
         fields = ['user', 'event', 'activity']
-
 '''

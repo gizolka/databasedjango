@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% if query_request %}
+
+
+  {% block body %}
+
+  <div class="container">
+    <h1>List of events</h1>
+    <table>
+      <tr>
+        <td>Title</td>
+        <td>Type</td>
+        <td>Start Date</td>
+        <td>End Date</td>
+        <td>Description</td>
+      </tr>
+
+  {% for event in query_request %}
+
+      <tr>
+        <td>{{ event.title }}</td>
+        <td>{{ event.type_of_event }}</td>
+        <td>{{ event.date }}</td>
+        <td>{{ event.end_date }}</td>
+        <td>{{ event.description}}</td>
+      </tr>
+
+  {% endfor %}
+
+    </table>
+  </div>
+
+{% endblock %}
+
+{% endif %}
