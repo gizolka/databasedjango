@@ -1,7 +1,7 @@
 
 {% extends 'base.html' %}
 
-
+{% debug %}
 {% block body %}
 <form action="." method="post">
   <div class="container">
@@ -9,6 +9,7 @@
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit">
+    <a href="/event/{{ object }}"></a>
   </div>
 </form>
 {% endblock %}
