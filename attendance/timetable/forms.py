@@ -17,16 +17,35 @@ ACTIVITY_TYPE_CHOICES = (
     ('', '----'),
     ('SP', 'Speaker'),
     ('AT', 'Attendee'),
+    ('TR', 'Trainer'),
 )
 
-class EventForm(forms.Form):
-    title = forms.CharField(label='Event title', max_length=200)
-    type_of_event = forms.ChoiceField(label='Event type', choices=TYPE_OF_EVENT_CHOICES)
-    date = forms.DateTimeField(label='Date', widget=forms.DateInput)
-    end_date = forms.DateTimeField(label='End date', widget=forms.DateInput)
-    description = forms.CharField(label='Event description', max_length=1000, required=False)
+class EventForm(forms.ModelForm):
+    title = forms.CharField()
+    type_of_event = forms.ChoiceField(
+        choices=TYPE_OF_EVENT_CHOICES,
+    )
+    date = forms.DateTimeField(
+        widget=forms.DateInput,
+    )
+    end_date = forms.DateTimeField(
+        widget=forms.DateInput,
+    )
+    description = forms.CharField(
+        required=False,
+    )
 
-class ActivityForm(forms.Form):
+    class Meta:
+        model = Event
+        fields = {
+            'title',
+            'type_of_event',
+            'date',
+            'end_date',
+            'description'
+        }
+
+class ActivityForm(ModelForm):
     type = forms.ChoiceField(
         required=True,
         choices=ACTIVITY_TYPE_CHOICES,

@@ -26,7 +26,7 @@ def new_event(request):
     if request.method=='POST':
         form = EventForm(request.POST)
         if form.is_valid():
-            print('is valid')
+            form.save(commit=True)
             return render(request, 'timetable/thanks.html', {'message': "Success"})
         else:
             return render(request, 'timetable/thanks.html', {'message': "Error"})
