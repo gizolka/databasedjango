@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% if object %}
+
+
+  {% block body %}
+
+  <div class="container">
+    <h1> {{ event.title }}</h1>
+    <li><a href="{% url 'view_event' event.id %}">{{ event.title }}</a></li>
+  </div>
+
+{% endblock %}
+
+{% endif %}

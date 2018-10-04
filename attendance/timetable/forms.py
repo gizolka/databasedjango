@@ -20,15 +20,11 @@ ACTIVITY_TYPE_CHOICES = (
 )
 
 class EventForm(forms.Form):
-    title = forms.CharField(required=True)
-    type_of_event = forms.ChoiceField(
-        required=True,
-        choices=TYPE_OF_EVENT_CHOICES,
-        )
-    date = forms.DateTimeField(widget=forms.DateInput,required=True)
-    end_date = forms.DateTimeField(widget=forms.DateInput, required=True)
-    description = forms.CharField(widget=forms.Textarea, required=False)
-
+    title = forms.CharField(label='Event title', max_length=200)
+    type_of_event = forms.ChoiceField(label='Event type', choices=TYPE_OF_EVENT_CHOICES)
+    date = forms.DateTimeField(label='Date', widget=forms.DateInput)
+    end_date = forms.DateTimeField(label='End date', widget=forms.DateInput)
+    description = forms.CharField(label='Event description', max_length=1000, required=False)
 
 class ActivityForm(forms.Form):
     type = forms.ChoiceField(
