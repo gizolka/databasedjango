@@ -1,8 +1,9 @@
 # timetable/views.py
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from .models import Event, Activity, Attendance
+from django.urls import reverse
 
 from timetable.forms import EventForm
 from timetable.forms import ActivityForm
@@ -26,8 +27,10 @@ def new_event(request):
     if request.method=='POST':
         form = EventForm(request.POST)
         if form.is_valid():
-            form.save(commit=True)
-            return render(request, 'timetable/thanks.html', {'message': "Success"})
+            # event = Event(title=form.cleaned_data['field-name'].....)
+            # event.save()
+            form.save()
+            return render(request, 'timetable/view_event.html')
         else:
             return render(request, 'timetable/thanks.html', {'message': "Error"})
     else:
@@ -35,14 +38,12 @@ def new_event(request):
     return render(request, 'timetable/event.html', {'form': form})
 
 def view_event(request, event_id):
-    try:
-      object = Event.objects.get(id=event_id)
-      context = {
-        'object': object
-      }
-    except Event.DoesNotExist:
-      raise Http404("Event does not exist")
+    object = get_object_or_404(Event,id=event_id)
+    context = { 'o': object }
+
     return render(request, 'timetable/view_event.html', context)
+
+
 
 def event_list(request):
     query_request = Event.objects.all()

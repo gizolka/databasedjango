@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 
-{% if object %}
-
+  {% if o %}
 
   {% block body %}
 
-  <div class="container">
-    <h1> {{ event.title }}</h1>
-    <li><a href="{% url 'view_event' event.id %}">{{ event.title }}</a></li>
-  </div>
+    <h1> {{ o.title }}</h1>
+
+    <table>
+      <tr>
+        <td>{{ o.title }}</td>
+        <td>{{ o.type_of_event }}</td>
+        <td>{{ o.date }}</td>
+        <td>{{ o.end_date }}</td>
+        <td>{{ o.description}}</td>
+      </tr>
+    </table>
 
 {% endblock %}
 
