@@ -1,18 +1,17 @@
+#timetable/urls.py
 from django.urls import path
-from . import views
-from django.contrib.auth.views import LoginView
-from django import forms
-
+from .views import (
+    TimetableListView,
+    TimetableCreateView,
+    TimetableDetailView,
+    TimetableUpdateView,
+    TimetableDeleteView,
+)
 
 urlpatterns = [
-        path('', views.home, name='home'),
-        #path('logout'), LogoutView.as_view(template_name='timetable/logout.html', name='logout'),
-        path('login/', LoginView.as_view(template_name='timetable/login.html'), name='login'),
-        path('event/', views.event_list, name='event'),
-        path('event/add/', views.new_event, name='event'),
-        path('event/<int:event_id>/', views.view_event, name='view_event'),
-        path('activity/add/', views.new_activity, name='activity'), 
+        path('', TimetableListView.as_view(), name='list'),
+        path('event/add/', TimetableCreateView.as_view(), name='event_add'),
+        path('event/<int:pk>/', TimetableDetailView.as_view(), name='view_event'),
+        path('event/<int:pk>/edit/', TimetableUpdateView.as_view(), name='event_edit'),
+        path('event/<int:pk>/delete/', TimetableDeleteView.as_view(), name='event_delete'),
 ]
-
-
-# path('links', views.links, name='links')

@@ -1,21 +1,8 @@
-import datetime
+#timetable/models.py
+
+from django.urls import reverse
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.utils import timezone
-
-# Create your models here.
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    department = models.CharField(max_length=100, default='')
-
-    def create_profile(sender, **kwargs):
-        if kwargs['created']:
-            user_profile = UserProfile.objects.create(user=kwargs['instance'])
-
-    post_save.connect(create_profile, sender=User)
 
 class Event(models.Model):
     title = models.CharField(max_length=200, default='')
@@ -28,7 +15,7 @@ class Event(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('event-detail', args=[str(self.id)])
+        return reverse('view_event', args=[str(self.id)])
 
 class Activity(models.Model):
     type = models.CharField(max_length=50, help_text='Enter either Speaker or Attendee')

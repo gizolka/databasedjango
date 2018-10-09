@@ -1,25 +1,48 @@
 # timetable/views.py
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import Http404, HttpResponseRedirect, HttpResponse
-from .models import Event, Activity, Attendance
-from django.urls import reverse
+from django.shortcuts import render
+from django.urls import reverse_lazy
 
-from timetable.forms import EventForm
-from timetable.forms import ActivityForm
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from django.views.generic import TemplateView
+from .models import Event
 
 
+class TimetableListView(ListView):
+    model = Event
+    template_name = 'list.html'
+
+class TimetableDetailView(DetailView):
+    model = Event
+    template_name = 'view_event.html'
+
+class TimetableCreateView(CreateView):
+    model = Event
+    template_name = 'event_add.html'
+    fields = '__all__'
+
+class TimetableUpdateView(UpdateView):
+    model = Event
+    template_name = 'event_edit.html'
+    fields = '__all__'
+
+class TimetableDeleteView(DeleteView):
+    model = Event
+    template_name = 'event_delete.html'
+    success_url = reverse_lazy('list')
+
+
+'''
 def home(request):
     numbers = [1,2,3,4,5]
     name = "Joanna Gizewska"
 
-    links = '''
+    links =
     <ul>
         <li><a href="/timetable/event/">Create an event</a></li>
     </ul>
-    '''
+
     return render(request, 'timetable/home.html', { 'message': links })
 
 def new_event(request):
@@ -68,3 +91,4 @@ def new_activity(request):
     else:
         form = ActivityForm()
         return render(request, 'timetable/event.html', {'form': form})
+'''
