@@ -8,6 +8,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Event
 
+# decorator login required
+
 
 class TimetableListView(ListView):
     model = Event
