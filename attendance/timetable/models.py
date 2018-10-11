@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
-
 class Event(models.Model):
     TYPE_OF_EVENT_CHOICES = (
         ('', '----'),
