@@ -1,5 +1,5 @@
 # timetable/views.py
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 
@@ -11,28 +11,33 @@ from .models import Event
 # decorator login required
 
 
-class TimetableListView(ListView):
+class TimetableListView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'list.html'
+    login_url = 'login'
 
-class TimetableDetailView(DetailView):
+class TimetableDetailView(LoginRequiredMixin, DetailView):
     model = Event
     template_name = 'view_event.html'
+    login_url = 'login'
 
-class TimetableCreateView(CreateView):
+class TimetableCreateView(LoginRequiredMixin, CreateView):
     model = Event
     template_name = 'event_add.html'
     fields = '__all__'
+    login_url = 'login'
 
-class TimetableUpdateView(UpdateView):
+class TimetableUpdateView(LoginRequiredMixin, UpdateView):
     model = Event
     template_name = 'event_edit.html'
     fields = '__all__'
+    login_url = 'login'
 
-class TimetableDeleteView(DeleteView):
+class TimetableDeleteView(LoginRequiredMixin, DeleteView):
     model = Event
     template_name = 'event_delete.html'
     success_url = reverse_lazy('list')
+    login_url = 'login'
 
 
 '''

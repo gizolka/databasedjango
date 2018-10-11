@@ -1,3 +1,4 @@
+''''
 import datetime
 from django import forms
 from django.db import models
@@ -55,7 +56,7 @@ class ActivityForm(ModelForm):
         required=True
     )
 
-'''
+
 class AttendanceForm(forms.Form):
         user =
         event =
