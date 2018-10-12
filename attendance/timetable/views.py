@@ -8,8 +8,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Event
 
-# decorator login required
-
 class HomePageView(LoginRequiredMixin, TemplateView):
     template_name = 'home.html'
     login_url = 'login'

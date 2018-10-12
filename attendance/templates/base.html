@@ -9,7 +9,7 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous">
       <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    {% block head %}
+    {% block title %}
       <title>SMILE Attendance</title>
     {% endblock %}
   </head>
@@ -28,9 +28,10 @@
               {{ user.username }}
             </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
-                <a class="dropdown-item" href="{% url 'password_change_form' %}">Change password</a>
-                  <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{%url 'logout' %}">Logout</a>
+                  <a class="dropdown-item" href="{%url 'logout' %}">Logout</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
               </div>
           </li>
         </ul>

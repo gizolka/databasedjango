@@ -12,6 +12,10 @@ class Event(models.Model):
         ('WS', 'Workshop'),
         ('ME', 'Meeting'),
     )
+    user = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+    )
     title = models.CharField(max_length=200, default='')
     type_of_event = models.CharField(max_length=100, choices=TYPE_OF_EVENT_CHOICES)
     date = models.DateTimeField('event date')
