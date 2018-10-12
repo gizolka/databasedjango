@@ -2,52 +2,29 @@
 
   {% block content %}
 
-<!--
-<div class="post-entry">
-
-    <h2> {{ event.title }}</h2>
-
-    <table>
+<table class="table table-striped">
+  <thead>
       <tr>
+        <th scope="col">User</th>
+        <th scope="col">Event Title</th>
+        <th scope="col">Event Type</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ event.user }}</td>
+        <td>{{ event.title }}</td>
         <td>{{ event.type_of_event }}</td>
         <td>{{ event.date }}</td>
         <td>{{ event.end_date }}</td>
-        <td>{{ event.description}}</td>
+        <td>{{ event.description }}</td>
       </tr>
-    </table>
-  </div>
+    </tbody>
+  </table>
+
   <p><a href="{% url 'event_edit' event.pk %}">Edit Event</a></p>
   <p><a href="{% url 'event_delete' event.pk %}">Delete Event</a></p>
 {% endblock %}
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
--->
