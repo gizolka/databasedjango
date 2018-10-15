@@ -1,14 +1,33 @@
 {% extends 'base.html' %}
 
   {% block content %}
-  <div class="container">
+  <table class="table table-striped">
+    <thead>
+        <tr>
+          <th scope="col">User</th>
+          <th scope="col">Event Title</th>
+          <th scope="col">Event Type</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">Description</th>
+        </tr>
+      </thead>
 
-  {% for event in object_list %}
+  {% for o in object_list %}
 
-    <h2> <a href="{% url 'view_event' event.pk %}">{{ event.title }}</a></h2>
+  <tbody>
+    <tr>
+      <td>{{ o.user }}</td>
+      <td><a href="{% url 'view_event' o.pk %}">{{ o.title }}</a></td>
+      <td>{{ o.type_of_event }}</td>
+      <td>{{ o.date }}</td>
+      <td>{{ o.end_date }}</td>
+      <td>{{ o.description }}</td>
+    </tr>
+  </tbody>
 
-  {% endfor %}
+{% endfor %}
 
-  </div>
+  </table>
 
 {% endblock %}
