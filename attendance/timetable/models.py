@@ -35,6 +35,8 @@ class Activity(models.Model):
         ('AT', 'Attendee'),
         ('TR', 'Trainer'),
     )
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, blank=True, default=None)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=True, default=None)
     type = models.CharField(max_length=50, choices=ACTIVITY_TYPE_CHOICES)
     duration = models.DecimalField(max_digits=5, decimal_places=1, help_text='Enter your attendance time in hours eg. 1h')
     description = models.TextField(max_length=1000, blank=True)
@@ -42,6 +44,8 @@ class Activity(models.Model):
     def __str__(self):
         return self.type
 
+    def get_absolute_url(self):
+        return reverse('list')
 
 class Attendance(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
