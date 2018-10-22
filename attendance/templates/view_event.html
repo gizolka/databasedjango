@@ -18,17 +18,12 @@
   <div class="card-body">{{ event.date }}</div>
   <h5 class="card-header">End Date</h5>
   <div class="card-body">{{ event.end_date }}</div>
+  <h5 class="card-header">Activity Type</h5>
+  <div class="card-body">{{ activity.type }}</div>
+  <h5 class="card-header">Activity Duration</h5>
+  <div class="card-body">{{ activity.duration }}</div>
   <h5 class="card-header">Description</h5>
   <div class="card-body">{{ event.description }}</div>
-
 </div>
-
-{% for activity in event.activities.all %}
-  <p>
-    <div class="font-weight-bold">{{ activity.title }}</div>
-    {{ activity.type }}
-  </p>
-{% endfor %}
-<br/>
 
 {% endblock %}
