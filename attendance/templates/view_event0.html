@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<table class="table table-striped">
+  <thead>
+      <tr>
+        <th scope="col">User</th>
+        <th scope="col">Event Title</th>
+        <th scope="col">Event Type</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ event.user }}</td>
+        <td>{{ event.title }}</td>
+        <td>{{ event.type_of_event }}</td>
+        <td>{{ event.date }}</td>
+        <td>{{ event.end_date }}</td>
+        <td>{{ event.description }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <p><a href="{% url 'event_edit' event.pk %}">Edit Event</a></p>
+  <p><a href="{% url 'event_delete' event.pk %}">Delete Event</a></p>
+  <p> Back to <a href="{% url 'list' %}">List of all events</a> </p>
+{% endblock %}

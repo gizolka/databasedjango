@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
-  {% block content %}
+{% block title %}Events{% endblock %}
+
+{% block content %}
   <table class="table table-striped">
     <thead>
         <tr>
@@ -26,7 +28,7 @@
     </tr>
   </tbody>
 
-{% endfor %}
+  {% endfor %}
 
   </table>
 

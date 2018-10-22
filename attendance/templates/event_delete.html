@@ -5,6 +5,7 @@
   <form action="" method="post">
     {% csrf_token %}
     <p>Are you sure you want to delete "{{ event.title }}"?</p>
+    <br>
     <button class="btn btn-danger ml-2" type="submit">Confirm</button>
   </form>
 {% endblock %}

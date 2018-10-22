@@ -3,13 +3,22 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
 {% if user.is_authenticated %}
-  <p>Hi {{ user.username }}!</p>
-  <p> <a href="{% url 'logout' %}">Logout</a> </p>
+    <h1 class="display-4">Welcome {{ user.username }}!</h1>
+    <a class="btn btn-primary btn-lg" href="{% url 'logout' %}">Logout</a>
+  </div>
+</div>
 {% else %}
-  <p>You are not logged in!</p>
-  <a href="{% url 'login' %}">Login</a>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Welcome to the awesome SMILE Event Checker</h1>
+      <p class="lead">This is a tool that will help you keep track of all of your attendencies, participations and other visits to various events all over the world.</p>
+      <a class="btn btn-primary btn-lg" href="{% url 'login' %}">Login</a>
+    </div>
+  </div>
+
 {% endif %}
 
 {% endblock %}

@@ -31,19 +31,18 @@ class TimetableCreateView(LoginRequiredMixin, CreateView):
     login_url = 'login'
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.user = self.request.user
         return super().form_valid(form)
-
 
 class TimetableUpdateView(LoginRequiredMixin, UpdateView):
     model = Event
     template_name = 'event_edit.html'
-    fields = '__all__'
+    fields = ('title', 'type_of_event', 'date', 'end_date', 'description')
     login_url = 'login'
 
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
-        if obj.author !=self.request.user:
+        if obj.user !=self.request.user:
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
 
@@ -58,7 +57,6 @@ class TimetableDeleteView(LoginRequiredMixin, DeleteView):
         if obj.author !=self.request.user:
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
-
 
 '''
 def home(request):

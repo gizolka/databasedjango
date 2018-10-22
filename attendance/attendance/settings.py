@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'timetable.apps.TimetableConfig',
     'users.apps.UsersConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,3 +126,4 @@ LOGIN_REDIRECT_URL = 'list'
 LOGOUT_REDIRECT_URL = 'list'
 AUTH_USER_MODEL = 'users.CustomUser'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+CRISPY_FORMS = 'bootstrap4'
