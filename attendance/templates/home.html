@@ -6,8 +6,10 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
 {% if user.is_authenticated %}
-    <h1 class="display-4">Welcome {{ user.username }}!</h1>
-    <a class="btn btn-primary btn-lg" href="{% url 'logout' %}">Logout</a>
+    <h1 class="display-4">Hello <b>{{ user.username }}</b>.</h1>
+    <p class="lead">What would you like to do?</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'list' %}">Stay!</a>
+    <a class="btn btn-danger btn-lg" href="{% url 'logout' %}">Logout</a>
   </div>
 </div>
 {% else %}

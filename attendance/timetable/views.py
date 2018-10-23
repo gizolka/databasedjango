@@ -39,25 +39,25 @@ class TimetableUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'event_edit.html'
     fields = ('title', 'type_of_event', 'date', 'end_date', 'type', 'duration', 'description')
     login_url = 'login'
-
+'''
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
         if obj.user !=self.request.user:
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
-
+'''
 class TimetableDeleteView(LoginRequiredMixin, DeleteView):
     model = Event
     template_name = 'event_delete.html'
     success_url = reverse_lazy('list')
     login_url = 'login'
-
+'''
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
-        if obj.author !=self.request.user:
+        if obj.user !=self.request.user:
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
-
+'''
 '''
 def home(request):
     numbers = [1,2,3,4,5]

@@ -3,27 +3,31 @@
 {% block actions %}
 <div class="container">
   <p>
-  <a href="{% url 'event_edit' event.pk %}">Edit</a> | <a href="{% url 'event_delete' event.pk %}">Delete</a>
+    <a type="button" class="btn btn-primary" href="{% url 'event_edit' event.pk %}">Edit</a> <a type="button" class="btn btn-danger" href="{% url 'event_delete' event.pk %}">Delete</a>
+    <a type="button" class="btn btn-success" href="{% url 'list' %}">All good</a>
   </p>
 </div>
 {% endblock %}
 
 {% block content %}
 <div class="card">
-  <h5 class="card-header">Title</h5>
+  <h5 class="card-header"><b>Event Title</b></h5>
   <div class="card-body">{{ event.title }}</div>
-  <h5 class="card-header">Event Type</h5>
+  <h5 class="card-header"><b>Event Type</b></h5>
   <div class="card-body">{{ event.type_of_event }}</div>
-  <h5 class="card-header">Start Date</h5>
+  <h5 class="card-header"><b>Start Date</b></h5>
   <div class="card-body">{{ event.date }}</div>
-  <h5 class="card-header">End Date</h5>
+  <h5 class="card-header"><b>End Date</b></h5>
   <div class="card-body">{{ event.end_date }}</div>
-  <h5 class="card-header">Activity Type</h5>
-  <div class="card-body">{{ activity.type }}</div>
-  <h5 class="card-header">Activity Duration</h5>
-  <div class="card-body">{{ activity.duration }}</div>
-  <h5 class="card-header">Description</h5>
+  <h5 class="card-header"><b>Activity Type</b></h5>
+  <div class="card-body">{{ event.type }}</div>
+  <h5 class="card-header"><b>Activity Duration</b></h5>
+  <div class="card-body">{{ event.duration }}</div>
+  <h5 class="card-header"><b>Description</b></h5>
   <div class="card-body">{{ event.description }}</div>
 </div>
 
 {% endblock %}
+
+
+<button !</button>

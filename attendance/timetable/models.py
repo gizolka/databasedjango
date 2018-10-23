@@ -14,9 +14,8 @@ class Activity(models.Model):
     type = models.CharField(
         max_length=50,
         choices=ACTIVITY_TYPE_CHOICES,
-        default='',
     )
-    duration = models.DecimalField(max_digits=2, decimal_places=1, null=True, default=1)
+    duration = models.DecimalField(max_digits=2, decimal_places=1)
 
     def __str__(self):
         return self.type
