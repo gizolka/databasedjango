@@ -7,5 +7,6 @@
     <p>Are you sure you want to delete "{{ event.title }}"?</p>
     <br>
     <button class="btn btn-danger ml-2" type="submit">Confirm</button>
+    <a class="btn btn-secondary" type="button" href="{% url 'list' %}">Cancel</a>
   </form>
 {% endblock %}

@@ -15,10 +15,11 @@ class Activity(models.Model):
         max_length=50,
         choices=ACTIVITY_TYPE_CHOICES,
     )
-    duration = models.DecimalField(max_digits=2, decimal_places=1)
+    duration = models.DecimalField(max_digits=4, decimal_places=2)
 
     def __str__(self):
-        return self.type
+#        return self.ACTIVITY_TYPE_CHOICES[self.type][1]
+        return self.type_of_event
 
     def get_absolute_url(self):
         return reverse('view_event')
