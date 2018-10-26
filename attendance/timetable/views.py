@@ -18,6 +18,24 @@ class TimetableListView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'list.html'
     login_url = 'login'
+    paginate_by = 10
+
+'''
+    def get_queryset(self):
+        filter_val = self.request.GET.get('title')
+        order = self.request.GET.get('user')
+        new_context = Update.objects.filter(
+            state=filter_val,
+        ).order_by(order)
+        return new_context
+
+    def get_context_data(self, **kwargs):
+        context = super(TimetableListView, self).get_context_data(**kwargs)
+        context['title'] = self.request.GET.get('title', 'title')
+        context['user'] = self.request.GET.get('user', 'user')
+        return context
+'''
+
 
 class TimetableDetailView(LoginRequiredMixin, DetailView):
     model = Event

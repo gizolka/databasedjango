@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="get" action="{% url 'list-update' %}">
+    <p>Filter: <input type="text" value={{filter}} name="title"/></p>
+    <p>order_by: <input type="text" value={{orderby}} name="user"/></p>
+    <p><input type="submit" name="submit" value="submit"/></p>
+</form>
+{% endblock %}
