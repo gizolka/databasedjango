@@ -3,13 +3,19 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid"> 
   <div class="container">
 {% if user.is_authenticated %}
-    <h1 class="display-4">Hello <b>{{ user.username }}</b>.</h1>
+    <h1 class="display-4">Hello <b>{{ user.username }}</b>!</h1>
+  </div>
+</div>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
     <p class="lead">What would you like to do?</p>
-    <a class="btn btn-primary btn-lg" href="{% url 'list' %}">Stay!</a>
-    <a class="btn btn-danger btn-lg" href="{% url 'logout' %}">Logout</a>
+    <br>
+    <a class="btn btn-primary btn-lg" href="{% url 'list' %}">View my events</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'event_add' %}">Create new event</a>
+      <a class="btn btn-danger btn-lg" href="{% url 'logout' %}">Logout</a>
   </div>
 </div>
 {% else %}

@@ -3,34 +3,54 @@
 {% block title %}Events{% endblock %}
 
 {% block actions %}
-<div class="container">
-  <div class="float-right">
-    <p>
-    <a type="button" class="btn btn-primary" href="{% url 'event_add' %}">New event</a>
-   </p>
-  </div>
-</div>
+
 {% endblock %}
 
 {% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="float-right">
+      <p>
+        <a type="button" class="btn btn-primary" href="{% url 'list' %}">All events</a>
+        <a type="button" class="btn btn-primary" href="{% url 'event_add' %}">New event</a>
+        <a type="button" class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+      </p>
+    </div>
+    <form method="get" action="{% url 'list' %}">
+      <p>Sort by: <select name="o">
+        <option value='user'>User</option>
+        <option value='title'>Title</option>
+        <option value='type_of_event'>Type</option>
+        <option value='date'>Start</option>
+        <option value='end_date'>End</option>
+        <option value='type'>Role</option>
+        </select>
+        Search: <input type="text" value='' name="f"/>
+        <!--
+        <input type="date" name="f" value="" id="start"/>
+        <input type="date" name="f" value="" id="end"/>
+        -->
 
-  <div class="table-responsive">
-  <table class="table table-bordered table-striped">
-    <thead>
+        <input type="submit" name="submit" value="submit"/>
+      </p>
+    </form>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead class="thead-light">
         <tr>
           <th scope="col">User</th>
-          <th scope="col">Event Title</th>
-          <th scope="col">Event Type</th>
-          <th scope="col">Start Date</th>
-          <th scope="col">End Date</th>
-          <th scope="col">Activity Type</th>
-          <th scope="col">Activity Duration</th>
+          <th scope="col">Title</th>
+          <th scope="col">Type</th>
+          <th scope="col">Start</th>
+          <th scope="col">End</th>
+          <th scope="col">Role</th>
+          <th scope="col">Duration</th>
           <th scope="col">Description</th>
         </tr>
     </thead>
-
   {% for o in object_list %}
-
     <tbody>
       <tr>
         <td>{{ o.user }}</td>
@@ -43,10 +63,47 @@
         <td>{{ o.description }}</td>
       </tr>
     </tbody>
-
   {% endfor %}
-
   </table>
-  </div>
+</div>
 
+  {% if is_paginated %}
+    <ul class="pagination pagination-sm">
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#">
+            <span>&laquo;</span>
+          </a>
+        </li>
+      {% endif %}
+      {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+          <li class="page-item active">
+            <a class="page-link" href="#">
+              <span>{{ i }} <span class="sr-only">(current)</span></span>
+            </a>
+          </li>
+        {% else %}
+          <li>
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <li>
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#">
+            <span>&raquo;</span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  {% endif %}
 {% endblock %}
