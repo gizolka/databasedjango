@@ -1,22 +1,45 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser
-
-class CustomUserCreationForm(UserCreationForm):
-
-    class Meta(UserCreationForm.Meta):
-        model = CustomUser
-        fields = UserCreationForm.Meta.fields + ('department',)
-
-    class CustomUserChangeForm(UserChangeForm):
-
-        class Meta:
-            model = CustomUser
-            fields = UserChangeForm.Meta.fields
+from django.core.urlresolvers import reverse
 
 
+class PersonalDataForm(forms.Form):
+        CONFERENCE = 'Conference'
+        TRAINING = 'Training'
+        WORKSHOP = 'Workshop'
+        MEETING = 'Meeting'
+        TYPE_OF_EVENT_CHOICES = (
+            (CONFERENCE, 'Conference'),
+            (TRAINING, 'Training'),
+            (WORKSHOP, 'Workshop'),
+            (MEETING, 'Meeting'),
+        )
 
-
+        SPEAKER = 'Speaker'
+        ATTENDEE = 'Attendee'
+        ACTIVITY_TYPE_CHOICES = (
+            (SPEAKER, 'Speaker'),
+            (ATTENDEE, 'Attendee'),
+        )
+        title = forms.CharField(max_length=100, required=True)
+        type_of_event = forms.ChoiceField(
+            max_length=15,
+            choices=TYPE_OF_EVENT_CHOICES,
+            required=True,
+            default=CONFERENCE,
+        )
+        date = forms.DateTimeField(widget=forms.DateInput)
+        end_date = forms.DateTimeField(widget=forms.DateInput)
+        description = forms.CharField(
+            widget=forms.Textarea,
+            max_length=500,
+            required=False,
+        )
+        type = forms.ChoiceField(
+            max_length=50,
+            choices=ACTIVITY_TYPE_CHOICES,
+            default=SPEAKER
+        )
+        duration = forms.DurationField()
 
 
 

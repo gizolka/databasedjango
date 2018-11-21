@@ -21,9 +21,8 @@ class TimetableListView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'list.html'
     login_url = 'login'
-    paginate_by = 6
+    paginate_by = 9
     queryset = Event.objects.all()
-
 
     def get_queryset(self):
         order = self.request.GET.get('o','date')
@@ -37,7 +36,6 @@ class TimetableListView(LoginRequiredMixin, ListView):
         context['o'] = self.request.GET.get('o', 'date')
         context['f'] = self.request.GET.get('f')
         return context
-
 
 class TimetableDetailView(LoginRequiredMixin, DetailView):
     model = Event

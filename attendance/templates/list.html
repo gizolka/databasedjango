@@ -25,6 +25,8 @@
         <option value='end_date'>End</option>
         <option value='type'>Role</option>
         </select>
+      </p>
+      <p>
         Search: <input type="text" value='' name="f"/>
         <!--
         <input type="date" name="f" value="" id="start"/>
@@ -36,7 +38,6 @@
     </form>
   </div>
 </div>
-<div class="table-responsive">
   <table class="table table-bordered">
     <thead class="thead-light">
         <tr>
@@ -53,11 +54,11 @@
   {% for o in object_list %}
     <tbody>
       <tr>
-        <td>{{ o.user }}</td>
+        <td scope="row">{{ o.user }}</td>
         <td><a href="{% url 'view_event' o.pk %}">{{ o.title }}</a></td>
         <td>{{ o.type_of_event }}</td>
-        <td>{{ o.date }}</td>
-        <td>{{ o.end_date }}</td>
+        <td>{{ o.date|date:"d/m/y" }}</td>
+        <td>{{ o.end_date|date:"d/m/y" }}</td>
         <td>{{ o.type }}</td>
         <td>{{ o.duration }}</td>
         <td>{{ o.description }}</td>
@@ -65,7 +66,6 @@
     </tbody>
   {% endfor %}
   </table>
-</div>
 
   {% if is_paginated %}
     <ul class="pagination pagination-sm">

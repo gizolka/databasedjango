@@ -6,35 +6,30 @@ from django.urls import reverse
 import datetime
 
 class Activity(models.Model):
-    SPEAKER = 'SP'
-    ATTENDEE = 'AT'
-    TRAINER = 'TR'
-    ORGANIZER = 'OR'
+    SPEAKER = 'Speaker'
+    ATTENDEE = 'Attendee'
     ACTIVITY_TYPE_CHOICES = (
         (SPEAKER, 'Speaker'),
         (ATTENDEE, 'Attendee'),
-        (TRAINER, 'Trainer'),
-        (ORGANIZER, 'Organizer')
     )
     type = models.CharField(
         max_length=50,
         choices=ACTIVITY_TYPE_CHOICES,
         default=SPEAKER
     )
-    duration = models.DecimalField(max_digits=4, decimal_places=2)
+    duration = models.FloatField()
 
     def __str__(self):
-#        return self.ACTIVITY_TYPE_CHOICES[self.type][1]
-        return self.type in (self.SPEAKER, self.ATTENDEE)
+        return self.type
 
     def get_absolute_url(self):
         return reverse('view_event')
 
 class Event(Activity):
-    CONFERENCE = 'CF'
-    TRAINING = 'TR'
-    WORKSHOP = 'WS'
-    MEETING = 'ME'
+    CONFERENCE = 'Conference'
+    TRAINING = 'Training'
+    WORKSHOP = 'Workshop'
+    MEETING = 'Meeting'
     TYPE_OF_EVENT_CHOICES = (
         (CONFERENCE, 'Conference'),
         (TRAINING, 'Training'),
@@ -46,16 +41,16 @@ class Event(Activity):
         on_delete=models.CASCADE,
         null=True,
     )
-    title = models.CharField(max_length=64, blank=False)
+    title = models.CharField(max_length=100, blank=False)
     type_of_event = models.CharField(
-        max_length=50,
+        max_length=15,
         choices=TYPE_OF_EVENT_CHOICES,
         blank=False,
         default=CONFERENCE,
     )
-    date = models.DateTimeField('event date')
-    end_date = models.DateTimeField('event enddate')
-    description = models.CharField(max_length=1000, blank=True)
+    date = models.DateTimeField('event date', help_text = "dd/mm/yy")
+    end_date = models.DateTimeField('event enddate', help_text = "dd/mm/yy")
+    description = models.TextField(max_length=500, blank=True)
 
     def __str__(self):
         return self.title
