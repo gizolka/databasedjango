@@ -12,12 +12,23 @@ class Activity(models.Model):
         (SPEAKER, 'Speaker'),
         (ATTENDEE, 'Attendee'),
     )
+
+    HALFDAY = '4 hours'
+    ONEDAY = '8 hours'
+    DURATION_CHOICES = (
+        (HALFDAY, '4 hours'),
+        (ONEDAY, '8 hours'),
+    )
     type = models.CharField(
         max_length=50,
         choices=ACTIVITY_TYPE_CHOICES,
-        default=SPEAKER
+        blank=False,
     )
-    duration = models.FloatField()
+    duration = models.CharField(
+        max_length=50,
+        choices=DURATION_CHOICES,
+        blank=False,
+    )
 
     def __str__(self):
         return self.type
@@ -46,10 +57,9 @@ class Event(Activity):
         max_length=15,
         choices=TYPE_OF_EVENT_CHOICES,
         blank=False,
-        default=CONFERENCE,
     )
-    date = models.DateTimeField('event date', help_text = "dd/mm/yy")
-    end_date = models.DateTimeField('event enddate', help_text = "dd/mm/yy")
+    date = models.DateField('event date', help_text = "dd/mm/yy")
+    end_date = models.DateField('event enddate', help_text = "dd/mm/yy")
     description = models.TextField(max_length=500, blank=True)
 
     def __str__(self):

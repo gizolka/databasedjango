@@ -4,30 +4,46 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.db.models import Q
-import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
+import datetime
 from .models import Event, Activity, Attendance
 
 class HomePageView(LoginRequiredMixin, TemplateView):
+    model = Event
     template_name = 'home.html'
     login_url = 'login'
+    context_object_name = 'object_list'
+    queryset = Event.objects.order_by('-user')
 
+    def get_context_data(self, **kwargs):
+        context = ({
+            'queryset': self.queryset,
+        })
+        return context
+
+'''
+    def get_queryset(self):
+        order = request.GET.get('o', 'user')
+        context = Event.objects.order_by(order)
+        return context
+'''
 
 class TimetableListView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'list.html'
     login_url = 'login'
-    paginate_by = 9
-    queryset = Event.objects.all()
+    paginate_by = 6
+
+    def get_order_by(self):
+        order_by = request.GET.get('order_by', 'default_order_field')
+        order_context = Event.objects.order_by(order_by)
+        return order_context
 
     def get_queryset(self):
         order = self.request.GET.get('o','date')
         filter_val = self.request.GET.get('f', '')
-        #new_context = Event.objects.filter(date__gte='2018-01-01', end_date__lte='2018-01-31')
         new_context = Event.objects.filter(Q(title__contains=filter_val) | Q(description__contains=filter_val)).order_by(order)
         return new_context
 

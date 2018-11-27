@@ -1,5 +1,7 @@
 #timetable/urls.py
 from django.urls import path
+from django_filters.views import FilterView
+from .models import Event, Attendance, Activity
 from .views import (
     TimetableListView,
     TimetableCreateView,

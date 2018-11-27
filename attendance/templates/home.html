@@ -1,32 +1,95 @@
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}
+Home
+{% endblock %}
 
 {% block content %}
-<div class="jumbotron jumbotron-fluid"> 
+<div class="jumbotron jumbotron-fluid">
   <div class="container">
 {% if user.is_authenticated %}
     <h1 class="display-4">Hello <b>{{ user.username }}</b>!</h1>
-  </div>
-</div>
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
     <p class="lead">What would you like to do?</p>
     <br>
-    <a class="btn btn-primary btn-lg" href="{% url 'list' %}">View my events</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'list' %}">View all events</a>
     <a class="btn btn-primary btn-lg" href="{% url 'event_add' %}">Create new event</a>
-      <a class="btn btn-danger btn-lg" href="{% url 'logout' %}">Logout</a>
+    <a class="btn btn-danger btn-lg" href="{% url 'logout' %}">Logout</a>
   </div>
 </div>
-{% else %}
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Welcome to the awesome SMILE Event Checker</h1>
-      <p class="lead">This is a tool that will help you keep track of all of your attendencies, participations and other visits to various events all over the world.</p>
-      <a class="btn btn-primary btn-lg" href="{% url 'login' %}">Login</a>
-    </div>
-  </div>
+<table class="table table-bordered">
+  <thead class="thead-light">
+      <tr>
+        <th scope="col">
+          <a href="?order_by={{ user.username }}">User</a>
+        </th>
+        <th scope="col">Title</th>
+        <th scope="col">Type</th>
+        <th scope="col">Start</th>
+        <th scope="col">End</th>
+        <th scope="col">Role</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Description</th>
+        <th scope="col">Actions</th>
+      </tr>
+  </thead>
+{% for queryset in object_list %}
+  <tbody>
+    <tr>
+      <td scope="row">{{ queryset.username }}</td>
+      <td>{{ queryset.title }}</td>
+      <td>{{ queryset.type_of_event }}</td>
+      <td>{{ queryset.date|date:"d/m/Y" }}</td>
+      <td>{{ queryset.end_date|date:"d/m/Y" }}</td>
+      <td>{{ queryset.type }}</td>
+      <td>{{ queryset.duration }}</td>
+      <td>{{ queryset.description }}</td>
+      <td>
+        <a href="{% url 'event_edit' o.pk %}"><i class="fas fa-pencil-alt"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+{% endfor %}
+</table>
 
+{% if is_paginated %}
+  <ul class="pagination pagination-sm">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">
+          <span>&laquo;</span>
+        </a>
+      </li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="page-item active">
+          <a class="page-link" href="#">
+            <span>{{ i }} <span class="sr-only">(current)</span></span>
+          </a>
+        </li>
+        {% else %}
+        <li>
+          <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li>
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">
+          <span>&raquo;</span>
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+  {% endif %}
 {% endif %}
-
 {% endblock %}

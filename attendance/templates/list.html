@@ -41,7 +41,9 @@
   <table class="table table-bordered">
     <thead class="thead-light">
         <tr>
-          <th scope="col">User</th>
+          <th scope="col">
+            <a href="?order_by={{ user.username }}">User</a>
+          </th>
           <th scope="col">Title</th>
           <th scope="col">Type</th>
           <th scope="col">Start</th>
@@ -49,19 +51,24 @@
           <th scope="col">Role</th>
           <th scope="col">Duration</th>
           <th scope="col">Description</th>
+          <th scope="col">Actions</th>
         </tr>
     </thead>
   {% for o in object_list %}
     <tbody>
       <tr>
         <td scope="row">{{ o.user }}</td>
-        <td><a href="{% url 'view_event' o.pk %}">{{ o.title }}</a></td>
+        <td>{{ o.title }}</td>
         <td>{{ o.type_of_event }}</td>
-        <td>{{ o.date|date:"d/m/y" }}</td>
-        <td>{{ o.end_date|date:"d/m/y" }}</td>
+        <td>{{ o.date|date:"d/m/Y" }}</td>
+        <td>{{ o.end_date|date:"d/m/Y" }}</td>
         <td>{{ o.type }}</td>
         <td>{{ o.duration }}</td>
         <td>{{ o.description }}</td>
+        <td>
+          <a href="{% url 'event_edit' o.pk %}"><i class="fas fa-pencil-alt"></i>
+          </a>
+        </td>
       </tr>
     </tbody>
   {% endfor %}
