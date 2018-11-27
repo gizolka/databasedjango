@@ -32,17 +32,17 @@ Home
         <th scope="col">Actions</th>
       </tr>
   </thead>
-{% for queryset in object_list %}
+{% for o in object_list %}
   <tbody>
     <tr>
-      <td scope="row">{{ queryset.username }}</td>
-      <td>{{ queryset.title }}</td>
-      <td>{{ queryset.type_of_event }}</td>
-      <td>{{ queryset.date|date:"d/m/Y" }}</td>
-      <td>{{ queryset.end_date|date:"d/m/Y" }}</td>
-      <td>{{ queryset.type }}</td>
-      <td>{{ queryset.duration }}</td>
-      <td>{{ queryset.description }}</td>
+      <td scope="row">{{ o.username }}</td>
+      <td>{{ o.title }}</td>
+      <td>{{ o.type_of_event }}</td>
+      <td>{{ o.date|date:"d/m/Y" }}</td>
+      <td>{{ o.end_date|date:"d/m/Y" }}</td>
+      <td>{{ o.type }}</td>
+      <td>{{ o.duration }}</td>
+      <td>{{ o.description }}</td>
       <td>
         <a href="{% url 'event_edit' o.pk %}"><i class="fas fa-pencil-alt"></i>
         </a>

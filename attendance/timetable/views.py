@@ -10,36 +10,35 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import datetime
 from .models import Event, Activity, Attendance
 
-class HomePageView(LoginRequiredMixin, TemplateView):
+class HomePageView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'home.html'
     login_url = 'login'
-    context_object_name = 'object_list'
-    queryset = Event.objects.order_by('-user')
-
-    def get_context_data(self, **kwargs):
-        context = ({
-            'queryset': self.queryset,
-        })
-        return context
 
 '''
     def get_queryset(self):
         order = request.GET.get('o', 'user')
         context = Event.objects.order_by(order)
         return context
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+        context['o'] = self.request.GET.get('o', 'date')
+        context['f'] = self.request.GET.get('f')
+        print('aaaa', context)
+        return context
 '''
+
 
 class TimetableListView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'list.html'
     login_url = 'login'
     paginate_by = 6
-
-    def get_order_by(self):
-        order_by = request.GET.get('order_by', 'default_order_field')
-        order_context = Event.objects.order_by(order_by)
-        return order_context
+    #def get_order_by(self):
+    #    order_by = request.GET.get('order_by', 'default_order_field')
+    #    order_context = Event.objects.order_by(order_by)
+    #    return order_context
 
     def get_queryset(self):
         order = self.request.GET.get('o','date')
