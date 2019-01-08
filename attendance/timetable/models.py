@@ -58,8 +58,8 @@ class Event(Activity):
         choices=TYPE_OF_EVENT_CHOICES,
         blank=False,
     )
-    date = models.DateField('event date', help_text = "dd/mm/yy")
-    end_date = models.DateField('event enddate', help_text = "dd/mm/yy")
+    date = models.DateTimeField('event date', help_text = "dd/mm/yy")
+    end_date = models.DateTimeField('event enddate', help_text = "dd/mm/yy")
     description = models.TextField(max_length=500, blank=True)
 
     def __str__(self):
@@ -68,6 +68,8 @@ class Event(Activity):
     def get_absolute_url(self):
         return reverse('view_event', args=[str(self.id)])
 
+    class Meta:
+        ordering = ['-date']
 
 '''
     event = models.ForeignKey(

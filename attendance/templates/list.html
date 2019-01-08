@@ -9,19 +9,12 @@
 {% block content %}
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <div class="float-right">
-      <p>
-        <a type="button" class="btn btn-primary" href="{% url 'list' %}">All events</a>
-        <a type="button" class="btn btn-primary" href="{% url 'event_add' %}">New event</a>
-        <a type="button" class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
-      </p>
-    </div>
     <form method="get" action="{% url 'list' %}">
       <p>Sort by: <select name="o">
         <option value='user'>User</option>
         <option value='title'>Title</option>
-        <option value='type_of_event'>Type</option>
         <option value='date'>Start</option>
+        <option value='type_of_event'>Type</option>
         <option value='end_date'>End</option>
         <option value='type'>Role</option>
         </select>
@@ -36,37 +29,52 @@
         <input type="submit" name="submit" value="submit"/>
       </p>
     </form>
+    <div class="float-right">
+        <a type="button" class="btn btn-primary btn-lg" href="{% url 'home' %}">My events</a>
+        <a type="button" class="btn btn-primary btn-lg" href="{% url 'event_add' %}">New event</a>
+        <a type="button" class="btn btn-danger btn-lg" href="{% url 'logout' %}">Logout</a>
+    </div>
   </div>
 </div>
   <table class="table table-bordered">
     <thead class="thead-light">
         <tr>
           <th scope="col">
-            <a href="?order_by={{ user.username }}">User</a>
+            <a href="?o=user">User</a>
           </th>
-          <th scope="col">Title</th>
-          <th scope="col">Type</th>
-          <th scope="col">Start</th>
-          <th scope="col">End</th>
-          <th scope="col">Role</th>
-          <th scope="col">Duration</th>
-          <th scope="col">Description</th>
+          <th scope="col">
+            <a href="?o=title">Title</a>
+          </th>
+          <!--<th scope="col">Type</th>-->
+          <th scope="col">
+            <a href="?o=date">Start</a>
+            </th>
+          <th scope="col">
+            <a href="?o=end_date">End</a>
+          </th>
+          <!--<th scope="col">Role</th>-->
+          <th scope="col">
+            <a href="?o=duration">Duration</a>
+          </th>
+          <!--<th scope="col">Description</th>-->
           <th scope="col">Actions</th>
         </tr>
     </thead>
   {% for o in object_list %}
     <tbody>
       <tr>
-        <td scope="row">{{ o.user }}</td>
+        <td>{{ o.user }}</td>
         <td>{{ o.title }}</td>
-        <td>{{ o.type_of_event }}</td>
+        <!--<td>{{ o.type_of_event }}</td>-->
         <td>{{ o.date|date:"d/m/Y" }}</td>
         <td>{{ o.end_date|date:"d/m/Y" }}</td>
-        <td>{{ o.type }}</td>
+        <!--<td>{{ o.type }}</td>-->
         <td>{{ o.duration }}</td>
-        <td>{{ o.description }}</td>
+        <!--<td>{{ o.description }}</td>-->
         <td>
-          <a href="{% url 'event_edit' o.pk %}"><i class="fas fa-pencil-alt"></i>
+          <a href="{% url 'view_event' o.pk %}"><i class="fas fa-eye" style="font-size:24px"></i>
+          </a>&nbsp;
+          <a href="{% url 'event_edit' o.pk %}"><i class="fas fa-pencil-alt" style="font-size:24px"></i>
           </a>
         </td>
       </tr>

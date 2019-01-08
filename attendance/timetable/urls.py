@@ -7,6 +7,7 @@ from .views import (
     TimetableDetailView,
     TimetableUpdateView,
     TimetableDeleteView,
+    HomePageView,
 )
 
 urlpatterns = [

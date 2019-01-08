@@ -10,35 +10,28 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import datetime
 from .models import Event, Activity, Attendance
 
+
 class HomePageView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'home.html'
     login_url = 'login'
+    paginate_by = 12
 
-'''
     def get_queryset(self):
-        order = request.GET.get('o', 'user')
-        context = Event.objects.order_by(order)
+        context = Event.objects.filter(user=self.request.user)
         return context
-
-    def get_context_data(self, **kwargs):
-        context = super(HomePageView, self).get_context_data(**kwargs)
-        context['o'] = self.request.GET.get('o', 'date')
-        context['f'] = self.request.GET.get('f')
-        print('aaaa', context)
-        return context
-'''
-
 
 class TimetableListView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'list.html'
     login_url = 'login'
-    paginate_by = 6
-    #def get_order_by(self):
-    #    order_by = request.GET.get('order_by', 'default_order_field')
-    #    order_context = Event.objects.order_by(order_by)
-    #    return order_context
+    paginate_by = 10
+
+# Sortable table columns
+    def get_order_by(self):
+        order_by = self.request.GET.get('order_by', '')
+        context_object_name = Event.objects.all().order_by(order_by)
+        return context_object_name
 
     def get_queryset(self):
         order = self.request.GET.get('o','date')
@@ -72,25 +65,25 @@ class TimetableUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'event_edit.html'
     fields = ('title', 'type_of_event', 'date', 'end_date', 'type', 'duration', 'description')
     login_url = 'login'
-'''
+
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
         if obj.user !=self.request.user:
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
-'''
+
 class TimetableDeleteView(LoginRequiredMixin, DeleteView):
     model = Event
     template_name = 'event_delete.html'
     success_url = reverse_lazy('list')
     login_url = 'login'
-'''
+
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
         if obj.user !=self.request.user:
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
-'''
+
 '''
 def home(request):
     numbers = [1,2,3,4,5]
