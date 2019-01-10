@@ -8,10 +8,15 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">Login</h1>
-    <form class="lead" method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <br>
-    <button class="btn btn-success ml-2" type="submit">Login</button>
-    </form>
+      <form class="lead" method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <br>
+      <button class="btn btn-success ml-2" type="submit">Login</button>
+      </form>
+      <p>
+        <a href="{% url 'password_reset' %}">Forgot your password?</a> 
+      </p>
+  </div>
+</div>
 {% endblock %}

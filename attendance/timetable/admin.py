@@ -9,16 +9,3 @@ admin.site.register(Event)
 admin.site.register(Activity)
 admin.site.register(Attendance)
 
-'''
-# field attribute and exclude attribute necessary!
-class EventAdminForm(forms.ModelForm):
-    user = forms.ModelChoiceField(queryset=Event.objects.order_by('username'))
-
-    class Meta:
-        model = Event
-
-class EventAdmin(admin.ModelAdmin):
-    form = EventAdminForm
-
-admin.site.register(EventAdmin)
-'''

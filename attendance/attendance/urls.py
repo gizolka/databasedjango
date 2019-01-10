@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
 from timetable.views import HomePageView
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('django.contrib.auth.urls')),
     path('timetable/', include('timetable.urls')),
     path('', HomePageView.as_view(template_name='home.html'), name='home'),
-#    path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    #path('', include('timetable.urls')),
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset.html'), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
+    path('password_reset/confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('password_reset/complete/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'), name='password_reset_complete'),
 ]

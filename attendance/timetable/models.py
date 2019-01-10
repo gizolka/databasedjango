@@ -13,16 +13,25 @@ class Activity(models.Model):
         (ATTENDEE, 'Attendee'),
     )
 
-    HALFDAY = '4 hours'
-    ONEDAY = '8 hours'
+    HALF = '4 hours'
+    ONE = '8 hours'
+    ONENHALF = '12 hours'
+    TWO = '16 hours'
+    TWONHALF = '20 hours'
+    THREE = '24 hours'
     DURATION_CHOICES = (
-        (HALFDAY, '4 hours'),
-        (ONEDAY, '8 hours'),
+        (HALF, '4 hours'),
+        (ONE, '8 hours'),
+        (ONENHALF, '12 hours'),
+        (TWO, '16 hours'),
+        (TWONHALF, '20 hours'),
+        (THREE, '24 hours'),
     )
     type = models.CharField(
         max_length=50,
         choices=ACTIVITY_TYPE_CHOICES,
         blank=False,
+        verbose_name="role",
     )
     duration = models.CharField(
         max_length=50,
@@ -47,19 +56,36 @@ class Event(Activity):
         (WORKSHOP, 'Workshop'),
         (MEETING, 'Meeting'),
     )
+
+    C3 = 'C3'
+    CIRCL = 'CIRCL'
+    CASES = 'CASES'
+    DEPARTMENT_CHOICES = (
+        (C3, 'C3'),
+        (CIRCL, 'CIRCL'),
+        (CASES, 'CASES'), 
+    )
     user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
         null=True,
+    )
+    department = models.CharField(
+        max_length=50, 
+        choices=DEPARTMENT_CHOICES, 
+        blank=False, 
+        default="default"
     )
     title = models.CharField(max_length=100, blank=False)
     type_of_event = models.CharField(
         max_length=15,
         choices=TYPE_OF_EVENT_CHOICES,
         blank=False,
+        verbose_name="type",
     )
-    date = models.DateTimeField('event date', help_text = "dd/mm/yy")
-    end_date = models.DateTimeField('event enddate', help_text = "dd/mm/yy")
+    date = models.DateTimeField('start', help_text = "dd/mm/yy")
+    end_date = models.DateTimeField('end', help_text = "dd/mm/yy")
+    country = models.CharField(max_length=50, blank=False)
     description = models.TextField(max_length=500, blank=True)
 
     def __str__(self):
@@ -70,18 +96,6 @@ class Event(Activity):
 
     class Meta:
         ordering = ['-date']
-
-'''
-    event = models.ForeignKey(
-        Event,
-        on_delete=models.CASCADE,
-        blank=False,
-        default=None,
-        related_name='activities',
-    )
-'''
-    #user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=False, default=None)
-    #description = models.TextField(max_length=1000, blank=True)
 
 class Attendance(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

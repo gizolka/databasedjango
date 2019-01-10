@@ -10,24 +10,15 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <form method="get" action="{% url 'list' %}">
-      <p>Sort by: <select name="o">
-        <option value='user'>User</option>
-        <option value='title'>Title</option>
-        <option value='date'>Start</option>
-        <option value='type_of_event'>Type</option>
-        <option value='end_date'>End</option>
-        <option value='type'>Role</option>
-        </select>
-      </p>
-      <p>
-        Search: <input type="text" value='' name="f"/>
-        <!--
-        <input type="date" name="f" value="" id="start"/>
-        <input type="date" name="f" value="" id="end"/>
-        -->
-
-        <input type="submit" name="submit" value="submit"/>
-      </p>
+      <div class="form-group row">
+        <label for="inputKeyword" class="col-sm-1 col-form-label">Search</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="inputKeyword" aria-describedby="textHelp" placeholder="Enter keyword" value='' name="f"/>
+          <small id="textHelp" class="form-text text-muted">Search within the fields "Title" and "Description".</small>
+          </br>
+          <input type="submit" name="submit" value="submit"/>
+        </div>
+      </div>
     </form>
     <div class="float-right">
         <a type="button" class="btn btn-primary btn-lg" href="{% url 'home' %}">My events</a>
@@ -45,18 +36,28 @@
           <th scope="col">
             <a href="?o=title">Title</a>
           </th>
-          <!--<th scope="col">Type</th>-->
+          <th scope="col">
+            <a href="?o=type_of_event">Type</a>
+          </th>
           <th scope="col">
             <a href="?o=date">Start</a>
             </th>
           <th scope="col">
             <a href="?o=end_date">End</a>
           </th>
-          <!--<th scope="col">Role</th>-->
+          <th scope="col">
+            <a href="?o=type">Role</a>
+          </th>
+          <th scope="col">
+            <a href="?o=department">Department</a>
+          </th>
+          <th scope="col">
+            <a href="?o=country">Country</a>
+          </th>
           <th scope="col">
             <a href="?o=duration">Duration</a>
           </th>
-          <!--<th scope="col">Description</th>-->
+          <th scope="col">Description</th>
           <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -65,12 +66,14 @@
       <tr>
         <td>{{ o.user }}</td>
         <td>{{ o.title }}</td>
-        <!--<td>{{ o.type_of_event }}</td>-->
+        <td>{{ o.type_of_event }}</td>
         <td>{{ o.date|date:"d/m/Y" }}</td>
         <td>{{ o.end_date|date:"d/m/Y" }}</td>
-        <!--<td>{{ o.type }}</td>-->
+        <td>{{ o.type }}</td>
+        <td>{{ o.department }}</td>
+        <td>{{ o.country }}</td>
         <td>{{ o.duration }}</td>
-        <!--<td>{{ o.description }}</td>-->
+        <td>{{ o.description }}</td>
         <td>
           <a href="{% url 'view_event' o.pk %}"><i class="fas fa-eye" style="font-size:24px"></i>
           </a>&nbsp;

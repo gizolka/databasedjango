@@ -122,8 +122,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-LOGIN_REDIRECT_URL = 'list'
-LOGOUT_REDIRECT_URL = 'list'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/users/login/'
 AUTH_USER_MODEL = 'users.CustomUser'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = '' # mail service smtp
+EMAIL_HOST_USER = '' # email id
+EMAIL_HOST_PASSWORD = '' #password
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 CRISPY_FORMS = 'bootstrap4'
+

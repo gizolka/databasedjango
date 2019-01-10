@@ -11,19 +11,23 @@
 
 {% block content %}
 <div class="card">
-  <h5 class="card-header"><b>Title</b></h5>
+  <h6 class="card-header"><b>Title</b></h6>
   <div class="card-body">{{ event.title }}</div>
-  <h5 class="card-header"><b>Type</b></h5>
+  <h6 class="card-header"><b>Type</b></h6>
   <div class="card-body">{{ event.type_of_event }}</div>
-  <h5 class="card-header"><b>Start</b></h5>
+  <h6 class="card-header"><b>Start</b></h6>
   <div class="card-body">{{ event.date|date:"d/m/y" }}</div>
-  <h5 class="card-header"><b>End</b></h5>
+  <h6 class="card-header"><b>End</b></h6>
   <div class="card-body">{{ event.end_date|date:"d/m/y" }}</div>
-  <h5 class="card-header"><b>Role</b></h5>
+  <h6 class="card-header"><b>Role</b></h6>
   <div class="card-body">{{ event.type }}</div>
-  <h5 class="card-header"><b>Duration</b></h5>
+  <h6 class="card-header"><b>Department</b></h6>
+  <div class="card-body">{{ event.department }}</div>
+  <h6 class="card-header"><b>Country</b></h6>
+  <div class="card-body">{{ event.country }}</div>
+  <h6 class="card-header"><b>Duration</b></h6>
   <div class="card-body">{{ event.duration }}</div>
-  <h5 class="card-header"><b>Description</b></h5>
+  <h6 class="card-header"><b>Description</b></h6>
   <div class="card-body">{{ event.description }}</div>
 </div>
 
