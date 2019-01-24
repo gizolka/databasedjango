@@ -50,7 +50,7 @@ class TimetableDetailView(LoginRequiredMixin, DetailView):
 class TimetableCreateView(LoginRequiredMixin, CreateView):
     model = Event
     template_name = 'event_add.html'
-    fields = ('title', 'type_of_event', 'date', 'end_date', 'type', 'department', 'country', 'duration', 'description')
+    fields = ('title', 'type_of_event', 'date', 'end_date', 'country', 'description', 'type', 'duration')
     login_url = 'login'
 
     def form_valid(self, form):
@@ -60,7 +60,7 @@ class TimetableCreateView(LoginRequiredMixin, CreateView):
 class TimetableUpdateView(LoginRequiredMixin, UpdateView):
     model = Event
     template_name = 'event_edit.html'
-    fields = ('title', 'type_of_event', 'date', 'end_date', 'type', 'department', 'country', 'duration', 'description')
+    fields = ('title', 'type_of_event', 'date', 'end_date', 'country', 'description', 'type', 'duration')
     login_url = 'login'
 
     def dispatch(self, request, *args, **kwargs):
