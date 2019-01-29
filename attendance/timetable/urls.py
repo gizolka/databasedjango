@@ -11,8 +11,8 @@ from .views import (
 )
 
 urlpatterns = [
-        path('', TimetableListView.as_view(), name='home'),
-        path('event/list/', TimetableListView.as_view(), name='list'),
+        path('', TimetableListView.as_view(), name='list'),
+        path('event/home/', TimetableListView.as_view(), name='home'),
         path('event/add/', TimetableCreateView.as_view(), name='event_add'),
         path('event/<int:pk>/', TimetableDetailView.as_view(), name='view_event'),
         path('event/<int:pk>/edit/', TimetableUpdateView.as_view(), name='event_edit'),

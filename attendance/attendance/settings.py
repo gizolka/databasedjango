@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'timetable.apps.TimetableConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'formtools',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

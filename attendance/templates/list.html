@@ -46,13 +46,10 @@
             <a href="?o=end_date">End</a>
           </th>
           <th scope="col">
-            <a href="?o=type">Role</a>
-          </th>
-          <th scope="col">
-            <a href="?o=department">Department</a>
-          </th>
-          <th scope="col">
             <a href="?o=country">Country</a>
+          </th>
+          <th scope="col">
+            <a href="?o=type">Role</a>
           </th>
           <th scope="col">
             <a href="?o=duration">Duration</a>
@@ -69,9 +66,8 @@
         <td>{{ o.type_of_event }}</td>
         <td>{{ o.date|date:"d/m/Y" }}</td>
         <td>{{ o.end_date|date:"d/m/Y" }}</td>
-        <td>{{ o.type }}</td>
-        <td>{{ o.department }}</td>
         <td>{{ o.country }}</td>
+        <td>{{ o.type }}</td>
         <td>{{ o.duration }}</td>
         <td>{{ o.description }}</td>
         <td>

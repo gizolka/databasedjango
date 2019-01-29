@@ -7,6 +7,8 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from formtools.wizard.views import SessionWizardView
+from .forms import EventForm1, EventForm2, EventForm3
 import datetime
 from .models import Event, Activity, Attendance
 
@@ -80,3 +82,13 @@ class TimetableDeleteView(LoginRequiredMixin, DeleteView):
         if obj.user !=self.request.user:
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
+
+#Creating split forms across multiple Web pages
+class EventWizard(SessionWizardView):
+    template_name = "formtools/wizard/wizard_form.html"
+    form_list = [EventForm1,EventForm2,EventForm3]
+    
+    def done(self, form_list, **kwargs):
+        return render(self.request, 'done.html', {
+            'form_data': [form.cleaned_data for form in form_list],
+        })

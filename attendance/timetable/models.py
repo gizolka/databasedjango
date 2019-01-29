@@ -3,39 +3,19 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
+from timetable import mychoices
 import datetime
 
-class Activity(models.Model):
-    SPEAKER = 'Speaker'
-    ATTENDEE = 'Attendee'
-    ACTIVITY_TYPE_CHOICES = (
-        (SPEAKER, 'Speaker'),
-        (ATTENDEE, 'Attendee'),
-    )
-
-    HALF = '4 hours'
-    ONE = '8 hours'
-    ONENHALF = '12 hours'
-    TWO = '16 hours'
-    TWONHALF = '20 hours'
-    THREE = '24 hours'
-    DURATION_CHOICES = (
-        (HALF, '4 hours'),
-        (ONE, '8 hours'),
-        (ONENHALF, '12 hours'),
-        (TWO, '16 hours'),
-        (TWONHALF, '20 hours'),
-        (THREE, '24 hours'),
-    )
+class Activity(models.Model):  
     type = models.CharField(
         max_length=50,
-        choices=ACTIVITY_TYPE_CHOICES,
+        choices=mychoices.ACTIVITY_TYPE_CHOICES,
         blank=False,
         verbose_name="role",
     )
     duration = models.CharField(
         max_length=50,
-        choices=DURATION_CHOICES,
+        choices=mychoices.DURATION_CHOICES,
         blank=False,
     )
 
@@ -46,40 +26,16 @@ class Activity(models.Model):
         return reverse('view_event')
 
 class Event(Activity):
-    CONFERENCE = 'Conference'
-    TRAINING = 'Training'
-    WORKSHOP = 'Workshop'
-    MEETING = 'Meeting'
-    TYPE_OF_EVENT_CHOICES = (
-        (CONFERENCE, 'Conference'),
-        (TRAINING, 'Training'),
-        (WORKSHOP, 'Workshop'),
-        (MEETING, 'Meeting'),
-    )
-
-    C3 = 'C3'
-    CIRCL = 'CIRCL'
-    CASES = 'CASES'
-    DEPARTMENT_CHOICES = (
-        (C3, 'C3'),
-        (CIRCL, 'CIRCL'),
-        (CASES, 'CASES'), 
-    )
     user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
         null=True,
     )
-    department = models.CharField(
-        max_length=50, 
-        choices=DEPARTMENT_CHOICES, 
-        blank=False, 
-        default="default"
-    )
+    
     title = models.CharField(max_length=100, blank=False)
     type_of_event = models.CharField(
         max_length=15,
-        choices=TYPE_OF_EVENT_CHOICES,
+        choices=mychoices.TYPE_OF_EVENT_CHOICES,
         blank=False,
         verbose_name="type",
     )
