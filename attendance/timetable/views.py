@@ -85,10 +85,16 @@ class TimetableDeleteView(LoginRequiredMixin, DeleteView):
 
 #Creating split forms across multiple Web pages
 class EventWizard(SessionWizardView):
-    template_name = "formtools/wizard/wizard_form.html"
+    template_name = "wizard_form.html"
     form_list = [EventForm1,EventForm2,EventForm3]
     
     def done(self, form_list, **kwargs):
         return render(self.request, 'done.html', {
             'form_data': [form.cleaned_data for form in form_list],
         })
+
+    def get(self, request, *args, **kwargs):
+        try:
+            return self.render(self.get_form())
+        except KeyError:
+            return super().get(request, *args, **kwargs)

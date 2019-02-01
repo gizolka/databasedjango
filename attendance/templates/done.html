@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Done{% endblock %}
+
+{% block content %}
+
+Congratulations!
+</br>
+You've created a new event successfully.
+</br>
+</br>
+
+<div class="float-left">
+    <a type="button" class="btn btn-primary btn-lg" href="{% url 'home' %}">My events</a>
+    <a type="button" class="btn btn-primary btn-lg" href="{% url 'event_add' %}">New event</a>
+    <a type="button" class="btn btn-danger btn-lg" href="{% url 'logout' %}">Logout</a>
+</div>
+
+{% endblock %}
