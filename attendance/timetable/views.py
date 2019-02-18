@@ -8,7 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from formtools.wizard.views import SessionWizardView
-from .forms import EventForm1, EventForm2, EventForm3
+from .forms import event, location, activity
 import datetime
 from .models import Event, Activity, Attendance
 
@@ -86,11 +86,31 @@ class TimetableDeleteView(LoginRequiredMixin, DeleteView):
 #Creating split forms across multiple Web pages
 class EventWizard(SessionWizardView):
     template_name = "wizard_form.html"
-    form_list = [EventForm1,EventForm2,EventForm3]
+    form_list = [event,location,activity]
     
-    def done(self, form_list, **kwargs):
+    def done(self, form_list, form_dict, **kwargs):
+        event       = form_dict['0']
+        location    = form_dict['1']
+        activity    = form_dict['2']
+
+        if event.is_valid() and location.is_valid():
+            E = Event.objects.create(
+                    user=self.request.user,
+                    title=event.cleaned_data['title'],
+                    type_of_event=event.cleaned_data['type_of_event'],
+                    date=event.cleaned_data['date'],
+                    end_date=event.cleaned_data['end_date'],
+                    country=location.cleaned_data['country'],
+                    description=location.cleaned_data['description']
+                )
+            E.save()
+        
+            
+
         return render(self.request, 'done.html', {
-            'form_data': [form.cleaned_data for form in form_list],
+            'event' : event.cleaned_data,
+            'location': location.cleaned_data,
+            'activity': activity.cleaned_data,
         })
 
     def get(self, request, *args, **kwargs):
