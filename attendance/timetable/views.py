@@ -93,7 +93,7 @@ class EventWizard(SessionWizardView):
         location    = form_dict['1']
         activity    = form_dict['2']
 
-        if event.is_valid() and location.is_valid():
+        if event.is_valid() and location.is_valid() and activity.is_valid():
             E = Event.objects.create(
                     user=self.request.user,
                     title=event.cleaned_data['title'],
@@ -101,12 +101,12 @@ class EventWizard(SessionWizardView):
                     date=event.cleaned_data['date'],
                     end_date=event.cleaned_data['end_date'],
                     country=location.cleaned_data['country'],
-                    description=location.cleaned_data['description']
+                    description=location.cleaned_data['description'],
+                    type=activity.cleaned_data['type'],
+                    duration=activity.cleaned_data['duration']
                 )
             E.save()
-        
             
-
         return render(self.request, 'done.html', {
             'event' : event.cleaned_data,
             'location': location.cleaned_data,

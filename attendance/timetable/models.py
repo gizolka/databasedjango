@@ -39,8 +39,8 @@ class Event(Activity):
         blank=False,
         verbose_name="type",
     )
-    date = models.DateTimeField('start', help_text = "dd/mm/yy")
-    end_date = models.DateTimeField('end', help_text = "dd/mm/yy")
+    date = models.DateTimeField('start', help_text = "dd/mm/yy", null=True)
+    end_date = models.DateTimeField('end', help_text = "dd/mm/yy", null=True)
     country = models.CharField(max_length=50, blank=False)
     description = models.TextField(max_length=500, blank=True)
 

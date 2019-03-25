@@ -1,5 +1,6 @@
 from django import forms
 from timetable import mychoices
+from django_countries.fields import CountryField
 
 from .models import Activity, Event, Attendance
 
